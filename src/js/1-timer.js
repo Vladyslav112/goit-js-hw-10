@@ -17,6 +17,7 @@ buttonStartRef.disabled = true;
 
 let userSelectedDate;
 let timerId;
+
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -29,13 +30,14 @@ const options = {
         title: 'Error',
         message: 'Please choose a date in the future',
       });
-      startButton.disabled = true;
+      buttonStartRef.disabled = true;
     } else {
       userSelectedDate = selectedDate;
-      startButton.disabled = false;
+      buttonStartRef.disabled = false;
     }
   },
 };
+
 flatpickr(inputDatetimeRef, options);
 
 function convertMs(ms) {
@@ -54,7 +56,7 @@ function convertMs(ms) {
 
 console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+console.log(convertMs(24140000)); // {days: 0, hours: 6, minutes: 42, seconds: 20}
 
 function addLeadingZero(value) {
   return value.toString().padStart(2, '0');
