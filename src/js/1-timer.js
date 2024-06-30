@@ -17,33 +17,22 @@ buttonStartRef.disabled = true;
 
 let userSelectedDate;
 let timerId;
-
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    if (selectedDates[0].getTime() > Date.now()) {
-      buttonStartRef.disabled = false;
-      userSelectedDate = selectedDates[0].getTime();
-    } else {
-      iziToast.show({
-        backgroundColor: '#ef4040',
-        close: false,
-        closeOnClick: true,
-        progressBarColor: 'white',
+    const selectedDate = selectedDates[0];
+    if (selectedDate <= new Date()) {
+      iziToast.error({
         title: 'Error',
-        titleColor: 'white',
-        iconUrl: Group,
-        position: 'topCenter',
-        icon: 'icon-error.svg',
-        messageColor: 'white',
-        messageSize: '16px',
         message: 'Please choose a date in the future',
       });
-
-      buttonStartRef.disabled = true;
+      startButton.disabled = true;
+    } else {
+      userSelectedDate = selectedDate;
+      startButton.disabled = false;
     }
   },
 };
